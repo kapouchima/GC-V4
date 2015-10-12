@@ -7,10 +7,10 @@
 #define Relay3 (portd.b2)
 #define Relay2 (portd.b1)
 #define Relay1 (portd.b0)
-#define IRin (!(portc.b0))
+#define IRin (portc.b0)
 #define RTEn1 (portc.b1)
 #define LED (portd.b7)
-#define MenuLevel 7
+#define MenuLevel 8
 
 
 #define CENTER (0b010)
@@ -72,7 +72,7 @@ unsigned long ms500=0,SimTime=0,LCTime=0;
 unsigned LCDBLCounter=360;
 
 //-----Configs
-char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0,WorkingMode=0;
+char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0,WorkingMode=0,IRMode=0;
 
 
 SignalingSystem SigSys;
@@ -414,12 +414,20 @@ char txt[10];
        break;
        
      case 6:
-       lcd_out(1,1,"6 Save Changes  ");
+       lcd_out(1,1,"7 IR in Mode   ");
+       if(IRMode==0)
+         lcd_out(2,1,"       NC       ");
+       else
+         lcd_out(2,1,"       NO       ");
+       break;
+       
+     case 7:
+       lcd_out(1,1,"8 Save Changes  ");
        lcd_out(2,1,_Blank);
        break;
 
-     case 7:
-       lcd_out(1,1,"7 Discard & Exit");
+     case 8:
+       lcd_out(1,1,"9 Discard & Exit");
        lcd_out(2,1,_Blank);
        break;
        
@@ -528,11 +536,23 @@ void Menu3()
       break;
       
     case 6:
+      if(Keys & UP)     if(WorkingMode<1)  {WorkingMode=WorkingMode+1;UpdateMenuText();}
+      if(Keys & DOWN)   if(WorkingMode>0)    {WorkingMode=WorkingMode-1;UpdateMenuText();}
+      if(Keys & CENTER) MenuState=1;
+      break;
+      
+    case 7:
+      if(Keys & UP)     if(IRMode<1)  {IRMode=IRMode+1;UpdateMenuText();}
+      if(Keys & DOWN)   if(IRMode>0)    {IRMode=IRMode-1;UpdateMenuText();}
+      if(Keys & CENTER) MenuState=1;
+      break;
+      
+    case 8:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;SaveConfig();MenuState=0;BuzzerCounter=20;}
       break;
       
-    case 7:
+    case 9:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;LoadConfig();MenuState=0;}
       break;
@@ -692,7 +712,7 @@ void Sim3() // Invalid 1
        SignalingSystem_AddSignal(&SigSys,ClosingTime-(InvalidTime*2),53); // closing time - invalid time * 2
   }
 
-  if(!IRin)
+  if(!(IRin^IRMode.b0))
   {
     SignalingSystem_ClearSignal(&SigSys,53);
     SignalingSystem_ClearSignal(&SigSys,52);
@@ -738,7 +758,7 @@ void Sim4() // Closing
        SignalingSystem_AddSignal(&SigSys,(InvalidTime*2),54); // invalid time * 2
   }
 
-  if(!IRin)
+  if(!(IRin^IRMode.b0))
   {
     SignalingSystem_ClearSignal(&SigSys,53);
     SignalingSystem_ClearSignal(&SigSys,54);
@@ -860,6 +880,7 @@ void SaveConfig()
   eeprom_write(3,AutocloseTime);
   eeprom_write(4,NetworkAddress);
   eeprom_write(5,WorkingMode);
+  eeprom_write(6,IRMode);
   
   RS485Slave_Init(NetworkAddress);
 }
@@ -880,6 +901,7 @@ void LoadConfig()
   AutocloseTime=eeprom_read(3);
   NetworkAddress=eeprom_read(4);
   WorkingMode=eeprom_read(5);
+  IRMode=eeprom_read(6);
 }
 
 
