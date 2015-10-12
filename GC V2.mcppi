@@ -1,0 +1,134 @@
+[DEVICE]
+Name=P18F45K80
+Clock=32000000
+[MEMORY_MODEL]
+Value=-1
+[BUILD_TYPE]
+Value=0
+[ACTIVE_TAB]
+Value=GC V2.c
+[USE_EEPROM]
+Value=1
+[USE_HEAP]
+Value=0
+[HEAP_SIZE]
+Value=2000
+[EEPROM_DEFINITION]
+Value=Keys\Keys.h
+[FILES]
+Count=4
+File0=GC V2.c
+File1=Signaling\Signaling.c
+File2=LCD\LCD.c
+File3=Keys\Keys.c
+[BINARIES]
+Count=0
+[IMAGES]
+Count=0
+ActiveImageIndex=-1
+[OPENED_FILES]
+Count=4
+File0=GC V2.c
+File1=Signaling\Signaling.h
+File2=Keys\Keys.c
+File3=Keys\Keys.h
+[EEPROM]
+Count=1
+File0=GC V2.ihex
+[ACTIVE_COMMENTS_FILES]
+Count=0
+[OTHER_FILES]
+Count=0
+[SEARCH_PATH]
+Count=18
+Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\defs\
+Path1=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\
+Path2=C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\
+Path3=C:\Users\baghi\Desktop\GC V2\GC Version II\
+Path4=C:\Users\baghi\Desktop\GC V2\GC V2\
+Path5=C:\Users\Kapouchima\Desktop\GC V2\
+Path6=C:\Users\baghi\Desktop\Sina\GateController\GC V2\
+Path7=C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling\
+Path8=C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD\
+Path9=C:\Users\Kapouchima\Desktop\GC V2\Signaling\
+Path10=C:\Users\Kapouchima\Desktop\GC V2\LCD\
+Path11=C:\Users\baghi\Desktop\GC V2\GC V2\Signaling\
+Path12=C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling\
+Path13=C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD\
+Path14=C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling\
+Path15=C:\Users\baghi\Desktop\GC V2\GC Version II\LCD\
+Path16=C:\Users\baghi\Desktop\GC V2\GC Version II\Keys\
+Path17=C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys\
+[HEADER_PATH]
+Count=11
+Path0=C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD\
+Path1=C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling\
+Path2=C:\Users\Kapouchima\Desktop\GC V2\LCD\
+Path3=C:\Users\Kapouchima\Desktop\GC V2\Signaling\
+Path4=C:\Users\baghi\Desktop\GC V2\GC V2\Signaling\
+Path5=C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling\
+Path6=C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD\
+Path7=C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling\
+Path8=C:\Users\baghi\Desktop\GC V2\GC Version II\LCD\
+Path9=C:\Users\baghi\Desktop\GC V2\GC Version II\Keys\
+Path10=C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys\
+[HEADERS]
+Count=3
+File0=Signaling\Signaling.h
+File1=LCD\LCD.h
+File2=Keys\Keys.h
+[PLDS]
+Count=0
+[Useses]
+Count=46
+File0=ADC
+File1=Button
+File2=CAN
+File3=CAN_SPI
+File4=Compact_Flash
+File5=Compact_Flash_FAT16
+File6=Conversions
+File7=C_Math
+File8=C_Stdlib
+File9=C_String
+File10=C_Type
+File11=EEPROM
+File12=EPSON_S1D13700
+File13=FLASH
+File14=Glcd
+File15=Glcd_Fonts
+File16=I2C
+File17=Keypad4x4
+File18=Lcd
+File19=Lcd_Constants
+File20=Manchester
+File21=One_Wire
+File22=Port_Expander
+File23=PrintOut
+File24=PS2
+File25=PWM
+File26=Software_I2C
+File27=Software_SPI
+File28=Software_UART
+File29=Sound
+File30=SPI
+File31=SPI_Ethernet
+File32=SPI_Ethernet_24j600
+File33=SPI_Glcd
+File34=SPI_Lcd
+File35=SPI_Lcd8
+File36=SPI_T6963C
+File37=Sprintf
+File38=Sprinti
+File39=Sprintl
+File40=T6963C
+File41=Time
+File42=TouchPanel
+File43=Trigonometry
+File44=UART
+File45=RS485
+[EXPANDED NODES]
+Node1=Sources
+Node2=Header Files
+Node3=EEPROM Files
+Count=3
