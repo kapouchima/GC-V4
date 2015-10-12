@@ -10,7 +10,7 @@
 #define IRin (!(portc.b0))
 #define RTEn1 (portc.b1)
 #define LED (portd.b7)
-#define MenuLevel 6
+#define MenuLevel 7
 
 
 #define CENTER (0b010)

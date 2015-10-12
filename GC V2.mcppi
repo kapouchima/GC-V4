@@ -34,9 +34,9 @@ ActiveImageIndex=-1
 [OPENED_FILES]
 Count=4
 File0=GC V2.c
-File1=Signaling\Signaling.h
-File2=Keys\Keys.c
-File3=Keys\Keys.h
+File1=Keys\Keys.c
+File2=..\GC\Signaling\Signaling.h
+File3=..\GC\Keys\Keys.h
 [EEPROM]
 Count=1
 File0=GC V2.ihex
@@ -45,18 +45,25 @@ Count=0
 [OTHER_FILES]
 Count=0
 [SEARCH_PATH]
-Count=22
+Count=10
 Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\
 Path1=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\
-Path2=C:\Users\Kapouchima\Desktop\GC\
-Path19=C:\Users\Kapouchima\Desktop\GC\Signaling\
-Path20=C:\Users\Kapouchima\Desktop\GC\LCD\
-Path21=C:\Users\Kapouchima\Desktop\GC\Keys\
+Path2=C:\Users\Kapouchima\Desktop\GC-V4\
+Path3=C:\Users\Kapouchima\Desktop\GC\
+Path4=C:\Users\Kapouchima\Desktop\GC\Signaling\
+Path5=C:\Users\Kapouchima\Desktop\GC\LCD\
+Path6=C:\Users\Kapouchima\Desktop\GC\Keys\
+Path7=C:\Users\Kapouchima\Desktop\GC-V4\Signaling\
+Path8=C:\Users\Kapouchima\Desktop\GC-V4\LCD\
+Path9=C:\Users\Kapouchima\Desktop\GC-V4\Keys\
 [HEADER_PATH]
-Count=14
-Path11=C:\Users\Kapouchima\Desktop\GC\Signaling\
-Path12=C:\Users\Kapouchima\Desktop\GC\LCD\
-Path13=C:\Users\Kapouchima\Desktop\GC\Keys\
+Count=6
+Path0=C:\Users\Kapouchima\Desktop\GC\Signaling\
+Path1=C:\Users\Kapouchima\Desktop\GC\LCD\
+Path2=C:\Users\Kapouchima\Desktop\GC\Keys\
+Path3=C:\Users\Kapouchima\Desktop\GC-V4\Signaling\
+Path4=C:\Users\Kapouchima\Desktop\GC-V4\LCD\
+Path5=C:\Users\Kapouchima\Desktop\GC-V4\Keys\
 [HEADERS]
 Count=3
 File0=Signaling\Signaling.h

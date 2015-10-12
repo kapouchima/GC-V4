@@ -1026,7 +1026,7 @@ _Menu2:
 	GOTO        L_Menu241
 L_Menu240:
 ;GC V2.c,465 :: 		MenuCounter=MenuLevel;
-	MOVLW       6
+	MOVLW       7
 	MOVWF       _MenuCounter+0 
 L_Menu241:
 ;GC V2.c,466 :: 		MenuState=1;
@@ -1038,7 +1038,7 @@ L_Menu239:
 	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu242
 ;GC V2.c,471 :: 		if(MenuCounter<MenuLevel)
-	MOVLW       6
+	MOVLW       7
 	SUBWF       _MenuCounter+0, 0 
 	BTFSC       STATUS+0, 0 
 	GOTO        L_Menu243
