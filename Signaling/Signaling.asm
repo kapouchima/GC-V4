@@ -13,10 +13,6 @@ L_SignalingSystem_CheckSignal0:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_SignalingSystem_CheckSignal1
 ;Signaling.c,9 :: 		if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Fired==1)&&(sys->SignalQueue[i].SignalCode==sigcode))
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+0 
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -25,10 +21,10 @@ L_SignalingSystem_CheckSignal0:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_CheckSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_CheckSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_CheckSignal+1, 0 
+	MOVF        FARG_SignalingSystem_CheckSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -40,10 +36,6 @@ L_SignalingSystem_CheckSignal0:
 	XORLW       0
 	BTFSS       STATUS+0, 2 
 	GOTO        L_SignalingSystem_CheckSignal5
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+0 
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -52,10 +44,10 @@ L_SignalingSystem_CheckSignal0:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_CheckSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_CheckSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_CheckSignal+1, 0 
+	MOVF        FARG_SignalingSystem_CheckSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       6
 	ADDWF       R0, 0 
@@ -67,10 +59,6 @@ L_SignalingSystem_CheckSignal0:
 	XORLW       1
 	BTFSS       STATUS+0, 2 
 	GOTO        L_SignalingSystem_CheckSignal5
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+0 
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -79,12 +67,12 @@ L_SignalingSystem_CheckSignal0:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
+	CALL        _Mul_16X16_U+0, 0
 	MOVF        R0, 0 
-	ADDWF       FLOC__SignalingSystem_CheckSignal+0, 0 
+	ADDWF       FARG_SignalingSystem_CheckSignal_sys+0, 0 
 	MOVWF       FSR0 
 	MOVF        R1, 0 
-	ADDWFC      FLOC__SignalingSystem_CheckSignal+1, 0 
+	ADDWFC      FARG_SignalingSystem_CheckSignal_sys+1, 0 
 	MOVWF       FSR0H 
 	MOVF        POSTINC0+0, 0 
 	MOVWF       R1 
@@ -94,10 +82,6 @@ L_SignalingSystem_CheckSignal0:
 	GOTO        L_SignalingSystem_CheckSignal5
 L__SignalingSystem_CheckSignal33:
 ;Signaling.c,10 :: 		{sys->SignalQueue[i].Expired=1;result=1;break;}
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+0 
-	MOVF        FARG_SignalingSystem_CheckSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_CheckSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -106,10 +90,10 @@ L__SignalingSystem_CheckSignal33:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_CheckSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_CheckSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_CheckSignal+1, 0 
+	MOVF        FARG_SignalingSystem_CheckSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -149,10 +133,6 @@ L_SignalingSystem_Task6:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_SignalingSystem_Task7
 ;Signaling.c,21 :: 		if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].Time==sys->SystemEPOCH)&&(sys->SignalQueue[i].Fired==0))
-	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Task+0 
-	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Task+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -161,10 +141,10 @@ L_SignalingSystem_Task6:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_Task+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_Task+1, 0 
+	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -176,10 +156,6 @@ L_SignalingSystem_Task6:
 	XORLW       0
 	BTFSS       STATUS+0, 2 
 	GOTO        L_SignalingSystem_Task11
-	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Task+0 
-	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Task+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -188,10 +164,10 @@ L_SignalingSystem_Task6:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_Task+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_Task+1, 0 
+	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       1
 	ADDWF       R0, 0 
@@ -238,10 +214,6 @@ L_SignalingSystem_Task6:
 L__SignalingSystem_Task39:
 	BTFSS       STATUS+0, 2 
 	GOTO        L_SignalingSystem_Task11
-	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Task+0 
-	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Task+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -250,10 +222,10 @@ L__SignalingSystem_Task39:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_Task+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_Task+1, 0 
+	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       6
 	ADDWF       R0, 0 
@@ -267,10 +239,6 @@ L__SignalingSystem_Task39:
 	GOTO        L_SignalingSystem_Task11
 L__SignalingSystem_Task34:
 ;Signaling.c,22 :: 		sys->SignalQueue[i].Fired=1;
-	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Task+0 
-	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Task+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -279,10 +247,10 @@ L__SignalingSystem_Task34:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_Task+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_Task_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_Task+1, 0 
+	MOVF        FARG_SignalingSystem_Task_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       6
 	ADDWF       R0, 0 
@@ -423,10 +391,6 @@ L_SignalingSystem_AddSignal14:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_SignalingSystem_AddSignal15
 ;Signaling.c,44 :: 		if(sys->SignalQueue[i].Expired==1)
-	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+0 
-	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -435,10 +399,10 @@ L_SignalingSystem_AddSignal14:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_AddSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_AddSignal+1, 0 
+	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -451,10 +415,6 @@ L_SignalingSystem_AddSignal14:
 	BTFSS       STATUS+0, 2 
 	GOTO        L_SignalingSystem_AddSignal17
 ;Signaling.c,46 :: 		sys->SignalQueue[i].SignalCode=sigcode;
-	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+0 
-	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -463,20 +423,16 @@ L_SignalingSystem_AddSignal14:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
+	CALL        _Mul_16X16_U+0, 0
 	MOVF        R0, 0 
-	ADDWF       FLOC__SignalingSystem_AddSignal+0, 0 
+	ADDWF       FARG_SignalingSystem_AddSignal_sys+0, 0 
 	MOVWF       FSR1 
 	MOVF        R1, 0 
-	ADDWFC      FLOC__SignalingSystem_AddSignal+1, 0 
+	ADDWFC      FARG_SignalingSystem_AddSignal_sys+1, 0 
 	MOVWF       FSR1H 
 	MOVF        FARG_SignalingSystem_AddSignal_sigcode+0, 0 
 	MOVWF       POSTINC1+0 
 ;Signaling.c,47 :: 		sys->SignalQueue[i].Time=signaltime;
-	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+0 
-	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -485,10 +441,10 @@ L_SignalingSystem_AddSignal14:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_AddSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_AddSignal+1, 0 
+	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       1
 	ADDWF       R0, 0 
@@ -505,10 +461,6 @@ L_SignalingSystem_AddSignal14:
 	MOVF        SignalingSystem_AddSignal_signaltime_L0+3, 0 
 	MOVWF       POSTINC1+0 
 ;Signaling.c,48 :: 		sys->SignalQueue[i].Expired=0;
-	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+0 
-	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -517,10 +469,10 @@ L_SignalingSystem_AddSignal14:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_AddSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_AddSignal+1, 0 
+	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -530,10 +482,6 @@ L_SignalingSystem_AddSignal14:
 	MOVWF       FSR1H 
 	CLRF        POSTINC1+0 
 ;Signaling.c,49 :: 		sys->SignalQueue[i].Fired=0;
-	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+0 
-	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_AddSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -542,10 +490,10 @@ L_SignalingSystem_AddSignal14:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_AddSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_AddSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_AddSignal+1, 0 
+	MOVF        FARG_SignalingSystem_AddSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       6
 	ADDWF       R0, 0 
@@ -579,10 +527,6 @@ L_SignalingSystem_ClearAllSignals18:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_SignalingSystem_ClearAllSignals19
 ;Signaling.c,62 :: 		if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode!=sigcode))
-	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_ClearAllSignals+0 
-	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_ClearAllSignals+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -591,10 +535,10 @@ L_SignalingSystem_ClearAllSignals18:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_ClearAllSignals+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_ClearAllSignals+1, 0 
+	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -606,10 +550,6 @@ L_SignalingSystem_ClearAllSignals18:
 	XORLW       0
 	BTFSS       STATUS+0, 2 
 	GOTO        L_SignalingSystem_ClearAllSignals23
-	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_ClearAllSignals+0 
-	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_ClearAllSignals+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -618,12 +558,12 @@ L_SignalingSystem_ClearAllSignals18:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
+	CALL        _Mul_16X16_U+0, 0
 	MOVF        R0, 0 
-	ADDWF       FLOC__SignalingSystem_ClearAllSignals+0, 0 
+	ADDWF       FARG_SignalingSystem_ClearAllSignals_sys+0, 0 
 	MOVWF       FSR0 
 	MOVF        R1, 0 
-	ADDWFC      FLOC__SignalingSystem_ClearAllSignals+1, 0 
+	ADDWFC      FARG_SignalingSystem_ClearAllSignals_sys+1, 0 
 	MOVWF       FSR0H 
 	MOVF        POSTINC0+0, 0 
 	MOVWF       R1 
@@ -633,10 +573,6 @@ L_SignalingSystem_ClearAllSignals18:
 	GOTO        L_SignalingSystem_ClearAllSignals23
 L__SignalingSystem_ClearAllSignals35:
 ;Signaling.c,63 :: 		sys->SignalQueue[i].Expired=1;
-	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_ClearAllSignals+0 
-	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_ClearAllSignals+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -645,10 +581,10 @@ L__SignalingSystem_ClearAllSignals35:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_ClearAllSignals+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_ClearAllSignals+1, 0 
+	MOVF        FARG_SignalingSystem_ClearAllSignals_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -680,10 +616,6 @@ L_SignalingSystem_ClearSignal24:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_SignalingSystem_ClearSignal25
 ;Signaling.c,73 :: 		if((sys->SignalQueue[i].Expired==0)&&(sys->SignalQueue[i].SignalCode==sigcode))
-	MOVF        FARG_SignalingSystem_ClearSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_ClearSignal+0 
-	MOVF        FARG_SignalingSystem_ClearSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_ClearSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -692,10 +624,10 @@ L_SignalingSystem_ClearSignal24:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_ClearSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_ClearSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_ClearSignal+1, 0 
+	MOVF        FARG_SignalingSystem_ClearSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -707,10 +639,6 @@ L_SignalingSystem_ClearSignal24:
 	XORLW       0
 	BTFSS       STATUS+0, 2 
 	GOTO        L_SignalingSystem_ClearSignal29
-	MOVF        FARG_SignalingSystem_ClearSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_ClearSignal+0 
-	MOVF        FARG_SignalingSystem_ClearSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_ClearSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -719,12 +647,12 @@ L_SignalingSystem_ClearSignal24:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
+	CALL        _Mul_16X16_U+0, 0
 	MOVF        R0, 0 
-	ADDWF       FLOC__SignalingSystem_ClearSignal+0, 0 
+	ADDWF       FARG_SignalingSystem_ClearSignal_sys+0, 0 
 	MOVWF       FSR0 
 	MOVF        R1, 0 
-	ADDWFC      FLOC__SignalingSystem_ClearSignal+1, 0 
+	ADDWFC      FARG_SignalingSystem_ClearSignal_sys+1, 0 
 	MOVWF       FSR0H 
 	MOVF        POSTINC0+0, 0 
 	MOVWF       R1 
@@ -734,10 +662,6 @@ L_SignalingSystem_ClearSignal24:
 	GOTO        L_SignalingSystem_ClearSignal29
 L__SignalingSystem_ClearSignal36:
 ;Signaling.c,74 :: 		sys->SignalQueue[i].Expired=1;
-	MOVF        FARG_SignalingSystem_ClearSignal_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_ClearSignal+0 
-	MOVF        FARG_SignalingSystem_ClearSignal_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_ClearSignal+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -746,10 +670,10 @@ L__SignalingSystem_ClearSignal36:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_ClearSignal+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_ClearSignal_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_ClearSignal+1, 0 
+	MOVF        FARG_SignalingSystem_ClearSignal_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -781,10 +705,6 @@ L_SignalingSystem_Init30:
 	BTFSC       STATUS+0, 0 
 	GOTO        L_SignalingSystem_Init31
 ;Signaling.c,85 :: 		sys->SignalQueue[i].SignalCode=0;
-	MOVF        FARG_SignalingSystem_Init_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Init+0 
-	MOVF        FARG_SignalingSystem_Init_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Init+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -793,19 +713,15 @@ L_SignalingSystem_Init30:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
+	CALL        _Mul_16X16_U+0, 0
 	MOVF        R0, 0 
-	ADDWF       FLOC__SignalingSystem_Init+0, 0 
+	ADDWF       FARG_SignalingSystem_Init_sys+0, 0 
 	MOVWF       FSR1 
 	MOVF        R1, 0 
-	ADDWFC      FLOC__SignalingSystem_Init+1, 0 
+	ADDWFC      FARG_SignalingSystem_Init_sys+1, 0 
 	MOVWF       FSR1H 
 	CLRF        POSTINC1+0 
 ;Signaling.c,86 :: 		sys->SignalQueue[i].Time=0;
-	MOVF        FARG_SignalingSystem_Init_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Init+0 
-	MOVF        FARG_SignalingSystem_Init_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Init+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -814,10 +730,10 @@ L_SignalingSystem_Init30:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_Init+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_Init_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_Init+1, 0 
+	MOVF        FARG_SignalingSystem_Init_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       1
 	ADDWF       R0, 0 
@@ -830,10 +746,6 @@ L_SignalingSystem_Init30:
 	CLRF        POSTINC1+0 
 	CLRF        POSTINC1+0 
 ;Signaling.c,87 :: 		sys->SignalQueue[i].Expired=1;
-	MOVF        FARG_SignalingSystem_Init_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Init+0 
-	MOVF        FARG_SignalingSystem_Init_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Init+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -842,10 +754,10 @@ L_SignalingSystem_Init30:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_Init+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_Init_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_Init+1, 0 
+	MOVF        FARG_SignalingSystem_Init_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       5
 	ADDWF       R0, 0 
@@ -856,10 +768,6 @@ L_SignalingSystem_Init30:
 	MOVLW       1
 	MOVWF       POSTINC1+0 
 ;Signaling.c,88 :: 		sys->SignalQueue[i].Fired=0;
-	MOVF        FARG_SignalingSystem_Init_sys+0, 0 
-	MOVWF       FLOC__SignalingSystem_Init+0 
-	MOVF        FARG_SignalingSystem_Init_sys+1, 0 
-	MOVWF       FLOC__SignalingSystem_Init+1 
 	MOVLW       7
 	MOVWF       R0 
 	MOVLW       0
@@ -868,10 +776,10 @@ L_SignalingSystem_Init30:
 	MOVWF       R4 
 	MOVLW       0
 	MOVWF       R5 
-	CALL        _Mul_16x16_U+0, 0
-	MOVF        FLOC__SignalingSystem_Init+0, 0 
+	CALL        _Mul_16X16_U+0, 0
+	MOVF        FARG_SignalingSystem_Init_sys+0, 0 
 	ADDWF       R0, 1 
-	MOVF        FLOC__SignalingSystem_Init+1, 0 
+	MOVF        FARG_SignalingSystem_Init_sys+1, 0 
 	ADDWFC      R1, 1 
 	MOVLW       6
 	ADDWF       R0, 0 

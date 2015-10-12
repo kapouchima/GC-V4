@@ -1,28 +1,20 @@
 #include "Signaling/Signaling.h"
 #include "Keys/Keys.h"
 
-#define Buzzer (portc.b5)
-#define Dip4 (!porta.b1)
-#define Dip3 (!porta.b2)
-#define Dip2 (!porta.b3)
-#define Dip1 (!porta.b5)
-#define LCDBL (porta.b6)
-#define Relay4 (portd.b0)
-//#define Relay2 (portd.b1)
-#define Relay3 (portd.b1)
-//#define Relay1 (portd.b2)
-#define Relay2 (portd.b2)
-//#define Relay3 (portd.b3)
-#define Relay1 (portd.b3)
+#define Buzzer (porta.b3)
+#define LCDBL (porta.b5)
+#define Relay4 (portd.b3)
+#define Relay3 (portd.b2)
+#define Relay2 (portd.b1)
+#define Relay1 (portd.b0)
 #define IRin (!(portc.b0))
 #define RTEn1 (portc.b1)
-#define RTEn2 (portc.b2)
-#define LED (porte.b0)
+#define LED (portd.b7)
 #define MenuLevel 6
 
 
-#define CENTER (0b001)
-#define UP (0b010)
+#define CENTER (0b010)
+#define UP (0b001)
 #define DOWN (0b100)
 
 #define DoorOpenTime 60
@@ -80,7 +72,7 @@ unsigned long ms500=0,SimTime=0,LCTime=0;
 unsigned LCDBLCounter=360;
 
 //-----Configs
-char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0;
+char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0,WorkingMode=0;
 
 
 SignalingSystem SigSys;
@@ -135,11 +127,11 @@ void Init()
   portc=0;
   portd=0;
   porte=0;
-  trisa=0b10111111;
+  trisa=0b11010111;
   trisb=0b11000000;
-  trisc=0b10000001;
-  trisd=0b10110000;
-  trise=0b1110;
+  trisc=0b10111101;
+  trisd=0b01110000;
+  trise=0b1111;
   
   //------TMR0
   T0CON=0b10000001; //prescaler 4
@@ -157,7 +149,7 @@ void Init()
   
   //-------UART
   UART1_Init(9600);
-  UART2_Init(9600);
+  //UART2_Init(9600);
   RC1IF_bit=0;
   RC1IE_bit=1;
   RC1IP_bit=1;
@@ -414,14 +406,23 @@ char txt[10];
        break;
 
      case 5:
+       lcd_out(1,1,"6 Working Mode  ");
+       if(WorkingMode==0)
+         lcd_out(2,1,"   Start/Stop   ");
+       else
+         lcd_out(2,1,"   Open/Close   ");
+       break;
+       
+     case 6:
        lcd_out(1,1,"6 Save Changes  ");
        lcd_out(2,1,_Blank);
        break;
 
-     case 6:
+     case 7:
        lcd_out(1,1,"7 Discard & Exit");
        lcd_out(2,1,_Blank);
        break;
+       
    }
 }
 
@@ -521,11 +522,17 @@ void Menu3()
       break;
       
     case 5:
+      if(Keys & UP)     if(WorkingMode<1)  {WorkingMode=WorkingMode+1;UpdateMenuText();}
+      if(Keys & DOWN)   if(WorkingMode>0)    {WorkingMode=WorkingMode-1;UpdateMenuText();}
+      if(Keys & CENTER) MenuState=1;
+      break;
+      
+    case 6:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;SaveConfig();MenuState=0;BuzzerCounter=20;}
       break;
       
-    case 6:
+    case 7:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;LoadConfig();MenuState=0;}
       break;
@@ -852,6 +859,8 @@ void SaveConfig()
   eeprom_write(2,InvalidTime);
   eeprom_write(3,AutocloseTime);
   eeprom_write(4,NetworkAddress);
+  eeprom_write(5,WorkingMode);
+  
   RS485Slave_Init(NetworkAddress);
 }
 
@@ -870,6 +879,7 @@ void LoadConfig()
   InvalidTime=eeprom_read(2);
   AutocloseTime=eeprom_read(3);
   NetworkAddress=eeprom_read(4);
+  WorkingMode=eeprom_read(5);
 }
 
 
@@ -981,10 +991,10 @@ void DoorManager()
     Relay2=0;
 
   if(SignalingSystem_CheckSignal(&SigSys,8))
-    Relay3=1;
+    Relay4=1;
     
   if(SignalingSystem_CheckSignal(&SigSys,9))
-    Relay3=0;
+    Relay4=0;
     
     
   
@@ -1047,7 +1057,7 @@ void OpenWhenClosed()
   //- Close on        8
   //- Close off       9
   
-  switch(Dip1)
+  switch(WorkingMode)
   {
     case 0: //Start stop mode
       SignalingSystem_AddSignal(&SigSys,1,6); //Stop on
@@ -1094,7 +1104,7 @@ void OpenWhenClosing()
   //- Close on        8
   //- Close off       9
   
-  switch(Dip1)
+  switch(WorkingMode)
   {
     case 0: //Start stop mode
       SignalingSystem_AddSignal(&SigSys,1,6); //Stop on

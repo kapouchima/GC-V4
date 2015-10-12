@@ -1,6 +1,6 @@
-#line 1 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
-#line 1 "c:/users/kapouchima/desktop/gc v2/gc-v2/gc version ii/signaling/signaling.h"
-#line 30 "c:/users/kapouchima/desktop/gc v2/gc-v2/gc version ii/signaling/signaling.h"
+#line 1 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
+#line 1 "c:/users/kapouchima/desktop/gc/signaling/signaling.h"
+#line 30 "c:/users/kapouchima/desktop/gc/signaling/signaling.h"
 typedef struct
 {
  char SignalCode;
@@ -22,11 +22,11 @@ void SignalingSystem_ClearSignal(SignalingSystem *,char);
 void SignalingSystem_ClearAllSignals(SignalingSystem * ,char );
 void SignalingSystem_Task(SignalingSystem *);
 void SignalingSystem_Init(SignalingSystem *);
-#line 1 "c:/users/kapouchima/desktop/gc v2/gc-v2/gc version ii/keys/keys.h"
-#line 38 "c:/users/kapouchima/desktop/gc v2/gc-v2/gc version ii/keys/keys.h"
+#line 1 "c:/users/kapouchima/desktop/gc/keys/keys.h"
+#line 38 "c:/users/kapouchima/desktop/gc/keys/keys.h"
 void KeysSystem_EPOCH();
 char KeysSystem_Task();
-#line 37 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 29 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 sbit LCD_RS at RB5_bit;
 sbit LCD_EN at RB4_bit;
 sbit LCD_D7 at RB3_bit;
@@ -73,7 +73,7 @@ unsigned long ms500=0,SimTime=0,LCTime=0;
 unsigned LCDBLCounter=360;
 
 
-char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0;
+char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0,WorkingMode=0;
 
 
 SignalingSystem SigSys;
@@ -128,11 +128,11 @@ void Init()
  portc=0;
  portd=0;
  porte=0;
- trisa=0b10111111;
+ trisa=0b11010111;
  trisb=0b11000000;
- trisc=0b10000001;
- trisd=0b10110000;
- trise=0b1110;
+ trisc=0b10111101;
+ trisd=0b01110000;
+ trise=0b1111;
 
 
  T0CON=0b10000001;
@@ -146,11 +146,11 @@ void Init()
 
  LCD_cmd(_LCD_CURSOR_OFF);
  delay_ms(500);
-  (porta.b6) =1;
+  (porta.b5) =1;
 
 
  UART1_Init(9600);
- UART2_Init(9600);
+
  RC1IF_bit=0;
  RC1IE_bit=1;
  RC1IP_bit=1;
@@ -169,7 +169,7 @@ void Init()
 
  RS485Slave_Init(NetworkAddress);
 }
-#line 192 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 184 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void interrupt()
 {
  if((TMR0IF_bit)&&(TMR0IE_bit))
@@ -189,7 +189,7 @@ void interrupt()
  RC1IF_bit=0;
  }
 }
-#line 223 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 215 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void main() {
 
 char dat;
@@ -208,9 +208,9 @@ while(1)
  KeysSystem_EPOCH();
 
  if(BuzzerCounter>0)
- {BuzzerCounter=BuzzerCounter-1; (portc.b5) =1;}
+ {BuzzerCounter=BuzzerCounter-1; (porta.b3) =1;}
  else
-  (portc.b5) =0;
+  (porta.b3) =0;
 
  Flag20ms=0;
  }
@@ -220,7 +220,7 @@ while(1)
  if(LCDBLCounter>0)
  LCDBLCounter=LCDBLCounter-1;
  else
-  (porta.b6) =0;
+  (porta.b5) =0;
  LCDFlashState=!LCDFlashState;
  FlashLCD();
  ms500=ms500+1;
@@ -243,10 +243,10 @@ while(1)
  NetworkTask();
  DoorManager();
 
- if(LCDBLCounter>0) (porta.b6) =1;
+ if(LCDBLCounter>0) (porta.b5) =1;
 }
 }
-#line 294 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 286 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void ShowLCTime()
 {
  static unsigned long PrevLCTime;
@@ -280,13 +280,13 @@ void ShowLCTime()
 
 
 }
-#line 346 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 338 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void MenuHandler()
 {
  switch(MenuState)
  {
  case 0:
- if(Keys &  (0b001) ) {MenuState=1;MenuCounter=0;}
+ if(Keys &  (0b010) ) {MenuState=1;MenuCounter=0;}
  ShowLCTime();
  break;
 
@@ -352,17 +352,26 @@ char txt[10];
  break;
 
  case 5:
+ lcd_out(1,1,"6 Working Mode  ");
+ if(WorkingMode==0)
+ lcd_out(2,1,"   Start/Stop   ");
+ else
+ lcd_out(2,1,"   Open/Close   ");
+ break;
+
+ case 6:
  lcd_out(1,1,"6 Save Changes  ");
  lcd_out(2,1,_Blank);
  break;
 
- case 6:
+ case 7:
  lcd_out(1,1,"7 Discard & Exit");
  lcd_out(2,1,_Blank);
  break;
+
  }
 }
-#line 440 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 441 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void Menu1()
 {
  UpdateMenuText();
@@ -391,7 +400,7 @@ void Menu2()
  MenuState=1;
  }
 
- if(Keys &  (0b010) )
+ if(Keys &  (0b001) )
  {
  if(MenuCounter< 6 )
  MenuCounter=MenuCounter+1;
@@ -400,7 +409,7 @@ void Menu2()
  MenuState=1;
  }
 
- if(Keys &  (0b001) )
+ if(Keys &  (0b010) )
  MenuState=3;
 }
 
@@ -417,42 +426,48 @@ void Menu3()
  switch(MenuCounter)
  {
  case 0:
- if(Keys &  (0b010) ) if(OpenningTime<255) {OpenningTime=OpenningTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(OpenningTime<255) {OpenningTime=OpenningTime+1;UpdateMenuText();}
  if(Keys &  (0b100) ) if(OpenningTime>0) {OpenningTime=OpenningTime-1;UpdateMenuText();}
- if(Keys &  (0b001) ) MenuState=1;
+ if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 1:
- if(Keys &  (0b010) ) if(ClosingTime<255) {ClosingTime=ClosingTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(ClosingTime<255) {ClosingTime=ClosingTime+1;UpdateMenuText();}
  if(Keys &  (0b100) ) if(ClosingTime>0) {ClosingTime=ClosingTime-1;UpdateMenuText();}
- if(Keys &  (0b001) ) MenuState=1;
+ if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 2:
- if(Keys &  (0b010) ) if(InvalidTime<255) {InvalidTime=InvalidTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(InvalidTime<255) {InvalidTime=InvalidTime+1;UpdateMenuText();}
  if(Keys &  (0b100) ) if(InvalidTime>0) {InvalidTime=InvalidTime-1;UpdateMenuText();}
- if(Keys &  (0b001) ) MenuState=1;
+ if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 3:
- if(Keys &  (0b010) ) if(AutocloseTime<255) {AutocloseTime=AutocloseTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(AutocloseTime<255) {AutocloseTime=AutocloseTime+1;UpdateMenuText();}
  if(Keys &  (0b100) ) if(AutocloseTime>0) {AutocloseTime=AutocloseTime-1;UpdateMenuText();}
- if(Keys &  (0b001) ) MenuState=1;
+ if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 4:
- if(Keys &  (0b010) ) if(NetworkAddress<255) {NetworkAddress=NetworkAddress+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(NetworkAddress<255) {NetworkAddress=NetworkAddress+1;UpdateMenuText();}
  if(Keys &  (0b100) ) if(NetworkAddress>0) {NetworkAddress=NetworkAddress-1;UpdateMenuText();}
- if(Keys &  (0b001) ) MenuState=1;
+ if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 5:
- if(Keys &  (0b001) ) MenuState=0;
- {LCDFlashFlag=0;SaveConfig();MenuState=0;BuzzerCounter=20;}
+ if(Keys &  (0b001) ) if(WorkingMode<1) {WorkingMode=WorkingMode+1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(WorkingMode>0) {WorkingMode=WorkingMode-1;UpdateMenuText();}
+ if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 6:
- if(Keys &  (0b001) ) MenuState=0;
+ if(Keys &  (0b010) ) MenuState=0;
+ {LCDFlashFlag=0;SaveConfig();MenuState=0;BuzzerCounter=20;}
+ break;
+
+ case 7:
+ if(Keys &  (0b010) ) MenuState=0;
  {LCDFlashFlag=0;LoadConfig();MenuState=0;}
  break;
  }
@@ -460,7 +475,7 @@ void Menu3()
 
 
 }
-#line 551 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 558 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void charValueToStr(char val, char * string)
 {
  bytetostr(val>>1,string);
@@ -469,7 +484,7 @@ void charValueToStr(char val, char * string)
  else
  memcpy(string+3,".0s",4);
 }
-#line 581 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 588 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void Sim0()
 {
 
@@ -485,7 +500,7 @@ void Sim0()
  DoorActFlag=0;
  }
 }
-#line 610 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 617 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void Sim1()
 {
  if(SignalingSystem_CheckSignal(&SigSys,50))
@@ -499,7 +514,7 @@ void Sim1()
  SignalingSystem_AddSignal(&SigSys,AutocloseTime-InvalidTime,51);
  }
 }
-#line 638 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 645 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void Sim2()
 {
  if(SignalingSystem_CheckSignal(&SigSys,51))
@@ -515,7 +530,7 @@ void Sim2()
  DoorActFlag=0;
  }
 }
-#line 675 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 682 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void Sim3()
 {
  if(SignalingSystem_CheckSignal(&SigSys,52))
@@ -542,7 +557,7 @@ void Sim3()
  SignalingSystem_AddSignal(&SigSys,InvalidTime,50);
  }
 }
-#line 721 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 728 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void Sim4()
 {
  if(SignalingSystem_CheckSignal(&SigSys,53))
@@ -583,7 +598,7 @@ void Sim4()
  DoorActFlag=0;
  }
 }
-#line 777 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 784 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void Sim5()
 {
  if(SignalingSystem_CheckSignal(&SigSys,54))
@@ -596,7 +611,7 @@ void Sim5()
  SimStatus=0;
  }
 }
-#line 807 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 814 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void DoorSimulator()
 {
  switch(SimStatus)
@@ -626,7 +641,7 @@ void DoorSimulator()
  break;
  }
 }
-#line 848 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 855 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void SaveConfig()
 {
  eeprom_write(0,OpenningTime);
@@ -634,6 +649,8 @@ void SaveConfig()
  eeprom_write(2,InvalidTime);
  eeprom_write(3,AutocloseTime);
  eeprom_write(4,NetworkAddress);
+ eeprom_write(5,WorkingMode);
+
  RS485Slave_Init(NetworkAddress);
 }
 
@@ -652,8 +669,9 @@ void LoadConfig()
  InvalidTime=eeprom_read(2);
  AutocloseTime=eeprom_read(3);
  NetworkAddress=eeprom_read(4);
+ WorkingMode=eeprom_read(5);
 }
-#line 886 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 896 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void FlashLCD()
 {
  static char PrevLCDFlashState;
@@ -703,7 +721,7 @@ void NetworkTask()
  NetBuffer[0]=200;
  Delay_ms(1);
  RS485Slave_Send(NetBuffer,1);
-  (porte.b0) =1;
+  (portd.b7) =1;
  break;
 
  case 2:
@@ -740,22 +758,22 @@ void DoorManager()
 
 
  if(SignalingSystem_CheckSignal(&SigSys,4))
-  (portd.b3) =1;
+  (portd.b0) =1;
 
  if(SignalingSystem_CheckSignal(&SigSys,5))
-  (portd.b3) =0;
+  (portd.b0) =0;
 
  if(SignalingSystem_CheckSignal(&SigSys,6))
-  (portd.b2) =1;
-
- if(SignalingSystem_CheckSignal(&SigSys,7))
-  (portd.b2) =0;
-
- if(SignalingSystem_CheckSignal(&SigSys,8))
   (portd.b1) =1;
 
- if(SignalingSystem_CheckSignal(&SigSys,9))
+ if(SignalingSystem_CheckSignal(&SigSys,7))
   (portd.b1) =0;
+
+ if(SignalingSystem_CheckSignal(&SigSys,8))
+  (portd.b3) =1;
+
+ if(SignalingSystem_CheckSignal(&SigSys,9))
+  (portd.b3) =0;
 
 
 
@@ -783,7 +801,7 @@ void DoorManager()
  SignalingSystem_AddSignal(&SigSys, 6 ,2);
  }
 }
-#line 1040 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 1050 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void OpenWhenClosed()
 {
 
@@ -794,7 +812,7 @@ void OpenWhenClosed()
 
 
 
- switch( (!porta.b5) )
+ switch(WorkingMode)
  {
  case 0:
  SignalingSystem_AddSignal(&SigSys,1,6);
@@ -813,7 +831,7 @@ void OpenWhenClosed()
  break;
  }
 }
-#line 1087 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/GC V2.c"
+#line 1097 "C:/Users/Kapouchima/Desktop/GC/GC V2.c"
 void OpenWhenClosing()
 {
 
@@ -824,7 +842,7 @@ void OpenWhenClosing()
 
 
 
- switch( (!porta.b5) )
+ switch(WorkingMode)
  {
  case 0:
  SignalingSystem_AddSignal(&SigSys,1,6);

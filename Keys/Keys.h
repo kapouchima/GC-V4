@@ -20,8 +20,8 @@
 #define KEYMODULE
 
 
-#define Key1 (!portd.b5)
-#define Key2 (!porta.b7)
+#define Key1 (!portd.b6)
+#define Key2 (!porta.b5)
 #define Key3 (!portd.b4)
 
 

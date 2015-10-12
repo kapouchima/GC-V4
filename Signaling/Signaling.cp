@@ -1,6 +1,6 @@
-#line 1 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/Signaling/Signaling.c"
-#line 1 "c:/users/kapouchima/desktop/gc v2/gc-v2/gc version ii/signaling/signaling.h"
-#line 30 "c:/users/kapouchima/desktop/gc v2/gc-v2/gc version ii/signaling/signaling.h"
+#line 1 "C:/Users/Kapouchima/Desktop/GC/Signaling/Signaling.c"
+#line 1 "c:/users/kapouchima/desktop/gc/signaling/signaling.h"
+#line 30 "c:/users/kapouchima/desktop/gc/signaling/signaling.h"
 typedef struct
 {
  char SignalCode;
@@ -22,7 +22,7 @@ void SignalingSystem_ClearSignal(SignalingSystem *,char);
 void SignalingSystem_ClearAllSignals(SignalingSystem * ,char );
 void SignalingSystem_Task(SignalingSystem *);
 void SignalingSystem_Init(SignalingSystem *);
-#line 5 "C:/Users/Kapouchima/Desktop/GC V2/GC-V2/GC Version II/Signaling/Signaling.c"
+#line 5 "C:/Users/Kapouchima/Desktop/GC/Signaling/Signaling.c"
 char SignalingSystem_CheckSignal(SignalingSystem *sys,char sigcode)
 {
  char i=0,result=0;

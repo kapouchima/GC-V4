@@ -1,30 +1,43 @@
-0	1	mikroCPIC1618.exe -MSF -DBG -pP18F45K80 -GC -Y -DL -O11111114 -fo32 -N"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\GC V2.mcppi" -EH"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\GC V2.ihex" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\" -SP"C:\Users\baghi\Desktop\GC V2\GC V2\" -SP"C:\Users\Kapouchima\Desktop\GC V2\" -SP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\" -SP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling\" -SP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD\" -SP"C:\Users\Kapouchima\Desktop\GC V2\Signaling\" -SP"C:\Users\Kapouchima\Desktop\GC V2\LCD\" -SP"C:\Users\baghi\Desktop\GC V2\GC V2\Signaling\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\LCD\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\Keys\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys\" -IP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD\" -IP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling\" -IP"C:\Users\Kapouchima\Desktop\GC V2\LCD\" -IP"C:\Users\Kapouchima\Desktop\GC V2\Signaling\" -IP"C:\Users\baghi\Desktop\GC V2\GC V2\Signaling\" -IP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling\" -IP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD\" -IP"C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling\" -IP"C:\Users\baghi\Desktop\GC V2\GC Version II\LCD\" -IP"C:\Users\baghi\Desktop\GC V2\GC Version II\Keys\" -IP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys\" "GC V2.c" "Signaling.c" "LCD.c" "Keys.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CString.mcl" "__Lib_CStdlib.mcl" "__Lib_CMath.mcl" "__Lib_Conversions.mcl" "__Lib_Sprintf.mcl" "__Lib_PrintOut.mcl" "__Lib_Sprinti.mcl" "__Lib_Sprintl.mcl" "__Lib_Time.mcl" "__Lib_Trigonometry.mcl" "__Lib_Button.mcl" "__Lib_Keypad4x4.mcl" "__Lib_Manchester.mcl" "__Lib_OneWire.mcl" "__Lib_PS2.mcl" "__Lib_Sound.mcl" "__Lib_SoftI2C.mcl" "__Lib_SoftSPI.mcl" "__Lib_SoftUART.mcl" "__Lib_ADC_K22.mcl" "__Lib_EEPROM_1024.mcl" "__Lib_FLASH_w64_e64.mcl" "__Lib_I2C_c34.mcl" "__Lib_PWM_d4c2675.mcl" "__Lib_SPI_c345.mcl" "__Lib_UART_c67d67.mcl" "__Lib_CAN_C_A.mcl" "__Lib_PortExpander.mcl" "__Lib_CANSPI.mcl" "__Lib_CF.mcl" "__Lib_CFFat16.mcl" "__Lib_GlcdFonts.mcl" "__Lib_Glcd.mcl" "__Lib_LcdConsts.mcl" "__Lib_Lcd.mcl" "__Lib_RS485.mcl" "__Lib_S1D13700.mcl" "__Lib_T6963C.mcl" "__Lib_SPIGlcd.mcl" "__Lib_SPILcd.mcl" "__Lib_SPILcd8.mcl" "__Lib_SPIT6963C.mcl" "__Lib_EthEnc28j60.mcl" "__Lib_EthEnc24j600.mcl" "__Lib_TouchPanel.mcl"	 
+0	1	mikroCPIC1618.exe -MSF -DBG -pP18F45K80 -RA -DL -O11111114 -fo32 -N"C:\Users\Kapouchima\Desktop\GC\GC V2.mcppi" -EH"C:\Users\Kapouchima\Desktop\GC\GC V2.ihex" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -SP"C:\Users\Kapouchima\Desktop\GC\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\" -SP"C:\Users\baghi\Desktop\GC V2\GC V2\" -SP"C:\Users\Kapouchima\Desktop\GC V2\" -SP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\" -SP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling\" -SP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD\" -SP"C:\Users\Kapouchima\Desktop\GC V2\Signaling\" -SP"C:\Users\Kapouchima\Desktop\GC V2\LCD\" -SP"C:\Users\baghi\Desktop\GC V2\GC V2\Signaling\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\LCD\" -SP"C:\Users\baghi\Desktop\GC V2\GC Version II\Keys\" -SP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys\" -SP"C:\Users\Kapouchima\Desktop\GC\Signaling\" -SP"C:\Users\Kapouchima\Desktop\GC\LCD\" -SP"C:\Users\Kapouchima\Desktop\GC\Keys\" -IP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD\" -IP"C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling\" -IP"C:\Users\Kapouchima\Desktop\GC V2\LCD\" -IP"C:\Users\Kapouchima\Desktop\GC V2\Signaling\" -IP"C:\Users\baghi\Desktop\GC V2\GC V2\Signaling\" -IP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling\" -IP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD\" -IP"C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling\" -IP"C:\Users\baghi\Desktop\GC V2\GC Version II\LCD\" -IP"C:\Users\baghi\Desktop\GC V2\GC Version II\Keys\" -IP"C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys\" -IP"C:\Users\Kapouchima\Desktop\GC\Signaling\" -IP"C:\Users\Kapouchima\Desktop\GC\LCD\" -IP"C:\Users\Kapouchima\Desktop\GC\Keys\" "GC V2.c" "Signaling.c" "LCD.c" "Keys.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_CType.mcl" "__Lib_CString.mcl" "__Lib_CStdlib.mcl" "__Lib_CMath.mcl" "__Lib_Conversions.mcl" "__Lib_Sprintf.mcl" "__Lib_PrintOut.mcl" "__Lib_Sprinti.mcl" "__Lib_Sprintl.mcl" "__Lib_Time.mcl" "__Lib_Trigonometry.mcl" "__Lib_Button.mcl" "__Lib_Keypad4x4.mcl" "__Lib_Manchester.mcl" "__Lib_OneWire.mcl" "__Lib_PS2.mcl" "__Lib_Sound.mcl" "__Lib_SoftI2C.mcl" "__Lib_SoftSPI.mcl" "__Lib_SoftUART.mcl" "__Lib_ADC_K22.mcl" "__Lib_EEPROM_1024.mcl" "__Lib_FLASH_w64_e64.mcl" "__Lib_I2C_c34.mcl" "__Lib_PWM_d4c2675.mcl" "__Lib_SPI_c345.mcl" "__Lib_UART_c67d67.mcl" "__Lib_CAN_C_A.mcl" "__Lib_PortExpander.mcl" "__Lib_CANSPI.mcl" "__Lib_CF.mcl" "__Lib_CFFat16.mcl" "__Lib_GlcdFonts.mcl" "__Lib_Glcd.mcl" "__Lib_LcdConsts.mcl" "__Lib_Lcd.mcl" "__Lib_RS485.mcl" "__Lib_S1D13700.mcl" "__Lib_T6963C.mcl" "__Lib_SPIGlcd.mcl" "__Lib_SPILcd.mcl" "__Lib_SPILcd8.mcl" "__Lib_SPIT6963C.mcl" "__Lib_EthEnc28j60.mcl" "__Lib_EthEnc24j600.mcl" "__Lib_TouchPanel.mcl"	 
+warning: 0	1501	Specified search path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC Version II'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC V2'	 
+warning: 0	1501	Specified search path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\Sina\GateController\GC V2'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\Signaling'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\LCD'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC V2\Signaling'	 
+warning: 0	1501	Specified search path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling'	 
+warning: 0	1501	Specified search path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC Version II\LCD'	 
 warning: 0	1501	Specified search path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC Version II\Keys'	 
+warning: 0	1501	Specified search path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\baghi\Desktop\Sina\GateController\GC V2\LCD'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\baghi\Desktop\Sina\GateController\GC V2\Signaling'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\LCD'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\Signaling'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC V2\Signaling'	 
+warning: 0	1502	Specified include path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Signaling'	 
+warning: 0	1502	Specified include path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\LCD'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC Version II\Signaling'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC Version II\LCD'	 
 warning: 0	1502	Specified include path does not exist: 'C:\Users\baghi\Desktop\GC V2\GC Version II\Keys'	 
+warning: 0	1502	Specified include path does not exist: 'C:\Users\Kapouchima\Desktop\GC V2\GC-V2\GC Version II\Keys'	 
 hint: 0	1139	Available RAM: 3628 [bytes], Available ROM: 32768 [bytes]	 
-diagnostics: 0	126	All files Preprocessed in 234 ms	 
+diagnostics: 0	122	Compilation Started	P18F45K80.c
+diagnostics: 6083	123	Compiled Successfully	P18F45K80.c
+diagnostics: 0	122	Compilation Started	__Lib_Delays.c
+diagnostics: 172	123	Compiled Successfully	__Lib_Delays.c
+diagnostics: 0	122	Compilation Started	__Lib_GlcdFonts.c
+diagnostics: 1207	123	Compiled Successfully	__Lib_GlcdFonts.c
 diagnostics: 0	122	Compilation Started	signaling.h
-warning: 159	1509	Generated baud rate is 9615 bps (error = 0.16 percent)	GC V2.c
-hint: 225	1163	Variable 'dat' has been declared, but not used	GC V2.c
-diagnostics: 1115	123	Compiled Successfully	GC V2.c
-hint: 298	1164	Variable 'hours' has been eliminated by optimizer	GC V2.c
+warning: 151	1509	Generated baud rate is 9615 bps (error = 0.16 percent)	GC V2.c
+hint: 217	1163	Variable 'dat' has been declared, but not used	GC V2.c
+diagnostics: 1125	123	Compiled Successfully	GC V2.c
+hint: 290	1164	Variable 'hours' has been eliminated by optimizer	GC V2.c
 diagnostics: 0	122	Compilation Started	signaling.h
 diagnostics: 92	123	Compiled Successfully	Signaling.c
 diagnostics: 0	122	Compilation Started	lcd.h
@@ -32,11 +45,10 @@ hint: 8	1163	Variable 'line' has been declared, but not used	LCD.c
 diagnostics: 95	123	Compiled Successfully	LCD.c
 diagnostics: 0	122	Compilation Started	keys.h
 diagnostics: 88	123	Compiled Successfully	Keys.c
-diagnostics: 0	127	All files Compiled in 343 ms	 
-hint: 0	1144	Used RAM (bytes): 567 (16%)  Free RAM (bytes): 3061 (84%)	Used RAM (bytes): 567 (16%)  Free RAM (bytes): 3061 (84%)
-hint: 0	1144	Used ROM (bytes): 11024 (34%)  Free ROM (bytes): 21744 (66%)	Used ROM (bytes): 11024 (34%)  Free ROM (bytes): 21744 (66%)
+diagnostics: 0	127	All files Compiled in 156 ms	 
+hint: 0	1144	Used RAM (bytes): 764 (21%)  Free RAM (bytes): 2864 (79%)	Used RAM (bytes): 764 (21%)  Free RAM (bytes): 2864 (79%)
+hint: 0	1144	Used ROM (bytes): 10721 (33%)  Free ROM (bytes): 22047 (67%)	Used ROM (bytes): 10721 (33%)  Free ROM (bytes): 22047 (67%)
 diagnostics: 0	125	Project Linked Successfully	GC V2.mcppi
-hint: 0	1004	COFF file successfully generated	COFF file successfully generated
-diagnostics: 0	128	Linked in 12699 ms	 
-diagnostics: 0	129	Project 'GC V2.mcppi' completed: 13370 ms	 
-diagnostics: 0	103	Finished successfully: 09 Sep 2015, 10:25:54	GC V2.mcppi
+diagnostics: 0	128	Linked in 141 ms	 
+diagnostics: 0	129	Project 'GC V2.mcppi' completed: 515 ms	 
+diagnostics: 0	103	Finished successfully: 12 Oct 2015, 11:25:20	GC V2.mcppi

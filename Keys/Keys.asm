@@ -28,7 +28,7 @@ _KeysSystem_Task:
 	CLRF        KeysSystem_Task_val_L0+0 
 	CLRF        KeysSystem_Task_res_L0+0 
 ;Keys.c,22 :: 		val.b0=Key1;
-	BTFSC       PORTD+0, 5 
+	BTFSC       PORTD+0, 6 
 	GOTO        L__KeysSystem_Task62
 	BSF         KeysSystem_Task_val_L0+0, 0 
 	GOTO        L__KeysSystem_Task63
@@ -36,7 +36,7 @@ L__KeysSystem_Task62:
 	BCF         KeysSystem_Task_val_L0+0, 0 
 L__KeysSystem_Task63:
 ;Keys.c,26 :: 		val.b1=Key2;
-	BTFSC       PORTA+0, 7 
+	BTFSC       PORTA+0, 5 
 	GOTO        L__KeysSystem_Task64
 	BSF         KeysSystem_Task_val_L0+0, 1 
 	GOTO        L__KeysSystem_Task65
