@@ -1,6 +1,6 @@
-#line 1 "C:/Users/Kapouchima/Desktop/GC/LCD/LCD.c"
-#line 1 "c:/users/kapouchima/desktop/gc/lcd/lcd.h"
-#line 29 "c:/users/kapouchima/desktop/gc/lcd/lcd.h"
+#line 1 "C:/Users/Kapouchima/Desktop/GC-V4/LCD/LCD.c"
+#line 1 "c:/users/kapouchima/desktop/gc-v4/lcd/lcd.h"
+#line 29 "c:/users/kapouchima/desktop/gc-v4/lcd/lcd.h"
 typedef struct
 {
  char Line1[17];
@@ -17,7 +17,7 @@ void LCDSystem_FlasherEPOCH();
 void LCDSystem_Init(LCDSystem *);
 void LCDSystem_Update(LCDSystem *);
 void LCDSystem_SetFlasher(LCDSystem *,char);
-#line 3 "C:/Users/Kapouchima/Desktop/GC/LCD/LCD.c"
+#line 3 "C:/Users/Kapouchima/Desktop/GC-V4/LCD/LCD.c"
 char LCDFlashEPOCHFlag;
 
 
@@ -25,7 +25,7 @@ void LCDSystem_Task(LCDSystem *sys)
 {
  static char line,LastLCDFlashState;
  char LCDLineTemp[16];
-#line 40 "C:/Users/Kapouchima/Desktop/GC/LCD/LCD.c"
+#line 40 "C:/Users/Kapouchima/Desktop/GC-V4/LCD/LCD.c"
  if(sys->LCDUpdateFlag==1)
  {
  lcd_out(1,0,sys->Line1);
