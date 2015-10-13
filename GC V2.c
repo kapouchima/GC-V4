@@ -536,23 +536,17 @@ void Menu3()
       break;
       
     case 6:
-      if(Keys & UP)     if(WorkingMode<1)  {WorkingMode=WorkingMode+1;UpdateMenuText();}
-      if(Keys & DOWN)   if(WorkingMode>0)    {WorkingMode=WorkingMode-1;UpdateMenuText();}
-      if(Keys & CENTER) MenuState=1;
-      break;
-      
-    case 7:
       if(Keys & UP)     if(IRMode<1)  {IRMode=IRMode+1;UpdateMenuText();}
       if(Keys & DOWN)   if(IRMode>0)    {IRMode=IRMode-1;UpdateMenuText();}
       if(Keys & CENTER) MenuState=1;
       break;
       
-    case 8:
+    case 7:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;SaveConfig();MenuState=0;BuzzerCounter=20;}
       break;
       
-    case 9:
+    case 8:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;LoadConfig();MenuState=0;}
       break;

@@ -470,23 +470,17 @@ void Menu3()
  break;
 
  case 6:
- if(Keys &  (0b001) ) if(WorkingMode<1) {WorkingMode=WorkingMode+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(WorkingMode>0) {WorkingMode=WorkingMode-1;UpdateMenuText();}
- if(Keys &  (0b010) ) MenuState=1;
- break;
-
- case 7:
  if(Keys &  (0b001) ) if(IRMode<1) {IRMode=IRMode+1;UpdateMenuText();}
  if(Keys &  (0b100) ) if(IRMode>0) {IRMode=IRMode-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
- case 8:
+ case 7:
  if(Keys &  (0b010) ) MenuState=0;
  {LCDFlashFlag=0;SaveConfig();MenuState=0;BuzzerCounter=20;}
  break;
 
- case 9:
+ case 8:
  if(Keys &  (0b010) ) MenuState=0;
  {LCDFlashFlag=0;LoadConfig();MenuState=0;}
  break;
@@ -495,7 +489,7 @@ void Menu3()
 
 
 }
-#line 578 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 572 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void charValueToStr(char val, char * string)
 {
  bytetostr(val>>1,string);
@@ -504,7 +498,7 @@ void charValueToStr(char val, char * string)
  else
  memcpy(string+3,".0s",4);
 }
-#line 608 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 602 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void Sim0()
 {
 
@@ -520,7 +514,7 @@ void Sim0()
  DoorActFlag=0;
  }
 }
-#line 637 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 631 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void Sim1()
 {
  if(SignalingSystem_CheckSignal(&SigSys,50))
@@ -534,7 +528,7 @@ void Sim1()
  SignalingSystem_AddSignal(&SigSys,AutocloseTime-InvalidTime,51);
  }
 }
-#line 665 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 659 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void Sim2()
 {
  if(SignalingSystem_CheckSignal(&SigSys,51))
@@ -550,7 +544,7 @@ void Sim2()
  DoorActFlag=0;
  }
 }
-#line 702 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 696 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void Sim3()
 {
  if(SignalingSystem_CheckSignal(&SigSys,52))
@@ -577,7 +571,7 @@ void Sim3()
  SignalingSystem_AddSignal(&SigSys,InvalidTime,50);
  }
 }
-#line 748 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 742 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void Sim4()
 {
  if(SignalingSystem_CheckSignal(&SigSys,53))
@@ -618,7 +612,7 @@ void Sim4()
  DoorActFlag=0;
  }
 }
-#line 804 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 798 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void Sim5()
 {
  if(SignalingSystem_CheckSignal(&SigSys,54))
@@ -631,7 +625,7 @@ void Sim5()
  SimStatus=0;
  }
 }
-#line 834 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 828 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void DoorSimulator()
 {
  switch(SimStatus)
@@ -661,7 +655,7 @@ void DoorSimulator()
  break;
  }
 }
-#line 875 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 869 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void SaveConfig()
 {
  eeprom_write(0,OpenningTime);
@@ -693,7 +687,7 @@ void LoadConfig()
  WorkingMode=eeprom_read(5);
  IRMode=eeprom_read(6);
 }
-#line 918 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 912 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void FlashLCD()
 {
  static char PrevLCDFlashState;
@@ -823,7 +817,7 @@ void DoorManager()
  SignalingSystem_AddSignal(&SigSys, 6 ,2);
  }
 }
-#line 1072 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 1066 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void OpenWhenClosed()
 {
 
@@ -853,7 +847,7 @@ void OpenWhenClosed()
  break;
  }
 }
-#line 1119 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
+#line 1113 "C:/Users/Kapouchima/Desktop/GC-V4/GC V2.c"
 void OpenWhenClosing()
 {
 
