@@ -10,7 +10,7 @@
 #define IRin (portc.b0)
 #define RTEn1 (portc.b1)
 #define LED (portd.b7)
-#define MenuLevel 8
+#define MenuLevel 9
 
 
 #define CENTER (0b010)
@@ -72,7 +72,7 @@ unsigned long ms500=0,SimTime=0,LCTime=0;
 unsigned LCDBLCounter=360;
 
 //-----Configs
-char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0,WorkingMode=0,IRMode=0;
+char OpenningTime=10,ClosingTime=10,InvalidTime=1,AutocloseTime=20,NetworkAddress=0,WorkingMode=0,IRMode=0,CarPassTime=0;
 
 
 SignalingSystem SigSys;
@@ -414,7 +414,7 @@ char txt[10];
        break;
        
      case 6:
-       lcd_out(1,1,"7 IR in Mode   ");
+       lcd_out(1,1,"7 IR in Mode    ");
        if(IRMode==0)
          lcd_out(2,1,"       NC       ");
        else
@@ -422,12 +422,18 @@ char txt[10];
        break;
        
      case 7:
-       lcd_out(1,1,"8 Save Changes  ");
+       lcd_out(1,1,"8 Car Pass Time ");
+       charValueToStr(CarPassTime,txt);
+       lcd_out(2,5,txt);
+       break;
+       
+     case 8:
+       lcd_out(1,1,"9 Save Changes  ");
        lcd_out(2,1,_Blank);
        break;
 
-     case 8:
-       lcd_out(1,1,"9 Discard & Exit");
+     case 9:
+       lcd_out(1,1,"10 Discard Exit ");
        lcd_out(2,1,_Blank);
        break;
        
@@ -542,11 +548,17 @@ void Menu3()
       break;
       
     case 7:
+      if(Keys & UP)     if(CarPassTime<255)  {CarPassTime=CarPassTime+1;UpdateMenuText();}
+      if(Keys & DOWN)   if(CarPassTime>0)    {CarPassTime=CarPassTime-1;UpdateMenuText();}
+      if(Keys & CENTER) MenuState=1;
+      break;
+      
+    case 8:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;SaveConfig();MenuState=0;BuzzerCounter=20;}
       break;
       
-    case 8:
+    case 9:
       if(Keys & CENTER) MenuState=0;
         {LCDFlashFlag=0;LoadConfig();MenuState=0;}
       break;
@@ -875,6 +887,7 @@ void SaveConfig()
   eeprom_write(4,NetworkAddress);
   eeprom_write(5,WorkingMode);
   eeprom_write(6,IRMode);
+  eeprom_write(7,CarPassTime);
   
   RS485Slave_Init(NetworkAddress);
 }
@@ -896,6 +909,7 @@ void LoadConfig()
   NetworkAddress=eeprom_read(4);
   WorkingMode=eeprom_read(5);
   IRMode=eeprom_read(6);
+  CarPassTime=eeprom_read(7);
 }
 
 
@@ -954,7 +968,7 @@ void NetworkTask()
           LCTime=ms500;
           OpenCommand=1;
           SignalingSystem_ClearSignal(&SigSys,1);
-          SignalingSystem_AddSignal(&SigSys,DoorOpenTime,1);
+          SignalingSystem_AddSignal(&SigSys,CarPassTime,1);
           NetBuffer[0]=200;
           Delay_ms(1);
           RS485Slave_Send(NetBuffer,1);

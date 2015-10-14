@@ -11,7 +11,7 @@ main
 		UART1_Init
 		UART_Set_Active
 		SignalingSystem_Init
-			Mul_16x16_U
+			Mul_16X16_U
 		LoadConfig
 			EEPROM_Read
 		RS485Slave_Init
@@ -34,15 +34,15 @@ main
 				Delay_50us
 	SignalingSystem_SystemEPOCH
 	SignalingSystem_Task
-		Mul_16x16_U
+		Mul_16X16_U
 	KeysSystem_Task
 	MenuHandler
 		ShowLCTime
 			Div_32x32_U
 			WordToStr
-				Div_16x16_U
+				Div_16X16_U
 			ByteToStr
-				Div_8x8_U
+				Div_8X8_U
 			memcpy
 			Lcd_Out
 				Lcd_Cmd
@@ -56,7 +56,6 @@ main
 						Delay_50us
 		Menu1
 			UpdateMenuText
-				__CC2DW
 				memcpy
 				Lcd_Cmd
 					Delay_1us
@@ -74,14 +73,13 @@ main
 							Delay_50us
 				charValueToStr
 					ByteToStr
-						Div_8x8_U
+						Div_8X8_U
 					memcpy
 				ByteToStr
-					Div_8x8_U
+					Div_8X8_U
 		Menu2
 		Menu3
 			UpdateMenuText
-				__CC2DW
 				memcpy
 				Lcd_Cmd
 					Delay_1us
@@ -99,10 +97,10 @@ main
 							Delay_50us
 				charValueToStr
 					ByteToStr
-						Div_8x8_U
+						Div_8X8_U
 					memcpy
 				ByteToStr
-					Div_8x8_U
+					Div_8X8_U
 			SaveConfig
 				EEPROM_Write
 				RS485Slave_Init
@@ -111,8 +109,7 @@ main
 	DoorSimulator
 		Sim0
 			SignalingSystem_AddSignal
-				Mul_16x16_U
-			__CC2DW
+				Mul_16X16_U
 			Lcd_Out
 				Lcd_Cmd
 					Delay_1us
@@ -125,8 +122,7 @@ main
 						Delay_50us
 		Sim1
 			SignalingSystem_CheckSignal
-				Mul_16x16_U
-			__CC2DW
+				Mul_16X16_U
 			Lcd_Out
 				Lcd_Cmd
 					Delay_1us
@@ -138,11 +134,10 @@ main
 						Delay_5500us
 						Delay_50us
 			SignalingSystem_AddSignal
-				Mul_16x16_U
+				Mul_16X16_U
 		Sim2
 			SignalingSystem_CheckSignal
-				Mul_16x16_U
-			__CC2DW
+				Mul_16X16_U
 			Lcd_Out
 				Lcd_Cmd
 					Delay_1us
@@ -154,11 +149,10 @@ main
 						Delay_5500us
 						Delay_50us
 			SignalingSystem_AddSignal
-				Mul_16x16_U
+				Mul_16X16_U
 		Sim3
 			SignalingSystem_CheckSignal
-				Mul_16x16_U
-			__CC2DW
+				Mul_16X16_U
 			Lcd_Out
 				Lcd_Cmd
 					Delay_1us
@@ -170,13 +164,12 @@ main
 						Delay_5500us
 						Delay_50us
 			SignalingSystem_AddSignal
-				Mul_16x16_U
+				Mul_16X16_U
 			SignalingSystem_ClearSignal
-				Mul_16x16_U
+				Mul_16X16_U
 		Sim4
 			SignalingSystem_CheckSignal
-				Mul_16x16_U
-			__CC2DW
+				Mul_16X16_U
 			Lcd_Out
 				Lcd_Cmd
 					Delay_1us
@@ -188,13 +181,12 @@ main
 						Delay_5500us
 						Delay_50us
 			SignalingSystem_AddSignal
-				Mul_16x16_U
+				Mul_16X16_U
 			SignalingSystem_ClearSignal
-				Mul_16x16_U
+				Mul_16X16_U
 		Sim5
 			SignalingSystem_CheckSignal
-				Mul_16x16_U
-			__CC2DW
+				Mul_16X16_U
 			Lcd_Out
 				Lcd_Cmd
 					Delay_1us
@@ -207,22 +199,22 @@ main
 						Delay_50us
 	NetworkTask
 		SignalingSystem_ClearSignal
-			Mul_16x16_U
+			Mul_16X16_U
 		SignalingSystem_AddSignal
-			Mul_16x16_U
+			Mul_16X16_U
 		RS485Slave_Send
 			____DoIFC
 	DoorManager
 		SignalingSystem_CheckSignal
-			Mul_16x16_U
+			Mul_16X16_U
 		OpenWhenClosed
 			SignalingSystem_AddSignal
-				Mul_16x16_U
+				Mul_16X16_U
 		SignalingSystem_AddSignal
-			Mul_16x16_U
+			Mul_16X16_U
 		OpenWhenClosing
 			SignalingSystem_AddSignal
-				Mul_16x16_U
+				Mul_16X16_U
 interrupt
 	RS485Slave_Receive
 		____DoIFC
