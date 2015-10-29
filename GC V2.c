@@ -14,8 +14,8 @@
 
 
 #define CENTER (0b010)
-#define UP (0b001)
-#define DOWN (0b100)
+#define DOWN (0b001)
+#define UP (0b100)
 
 #define DoorOpenTime 60
 #define DoorActionDelay 6
@@ -416,9 +416,9 @@ char txt[10];
      case 6:
        lcd_out(1,1,"7 IR in Mode    ");
        if(IRMode==0)
-         lcd_out(2,1,"       NC       ");
-       else
          lcd_out(2,1,"       NO       ");
+       else
+         lcd_out(2,1,"       NC       ");
        break;
        
      case 7:

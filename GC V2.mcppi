@@ -14,12 +14,10 @@ Value=0
 [HEAP_SIZE]
 Value=2000
 [EEPROM_DEFINITION]
-Value=
-[EXPANDED NODES]
-Node1=Sources
-Node2=Header Files
-Node3=EEPROM Files
-Count=3
+Value=Keys\Keys.h
+[EXPANDED_NODES]
+Node0=Header Files
+Count=1
 [FILES]
 Count=4
 File0=GC V2.c
@@ -32,10 +30,9 @@ Count=0
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-Count=3
+Count=2
 File0=GC V2.c
 File1=Keys\Keys.h
-File2=..\GC\Keys\Keys.c
 [EEPROM]
 Count=1
 File0=GC V2.ihex
@@ -45,7 +42,7 @@ Count=0
 Count=0
 [SEARCH_PATH]
 Count=10
-Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\
+Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\defs\
 Path1=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\
 Path2=C:\Users\Kapouchima\Desktop\GC-V4\
 Path3=C:\Users\Kapouchima\Desktop\GC\
@@ -118,6 +115,8 @@ File42=TouchPanel
 File43=Trigonometry
 File44=UART
 File45=RS485
-[EXPANDED_NODES]
-Node0=Header Files
-Count=1
+[EXPANDED NODES]
+Node1=Sources
+Node2=Header Files
+Node3=EEPROM Files
+Count=3

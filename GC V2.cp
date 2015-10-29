@@ -362,9 +362,9 @@ char txt[10];
  case 6:
  lcd_out(1,1,"7 IR in Mode    ");
  if(IRMode==0)
- lcd_out(2,1,"       NC       ");
- else
  lcd_out(2,1,"       NO       ");
+ else
+ lcd_out(2,1,"       NC       ");
  break;
 
  case 7:
@@ -405,7 +405,7 @@ void Menu2()
 
 
  LCDFlashFlag=0;
- if(Keys &  (0b100) )
+ if(Keys &  (0b001) )
  {
  if(MenuCounter>0)
  MenuCounter=MenuCounter-1;
@@ -414,7 +414,7 @@ void Menu2()
  MenuState=1;
  }
 
- if(Keys &  (0b001) )
+ if(Keys &  (0b100) )
  {
  if(MenuCounter< 9 )
  MenuCounter=MenuCounter+1;
@@ -440,50 +440,50 @@ void Menu3()
  switch(MenuCounter)
  {
  case 0:
- if(Keys &  (0b001) ) if(OpenningTime<255) {OpenningTime=OpenningTime+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(OpenningTime>0) {OpenningTime=OpenningTime-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(OpenningTime<255) {OpenningTime=OpenningTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(OpenningTime>0) {OpenningTime=OpenningTime-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 1:
- if(Keys &  (0b001) ) if(ClosingTime<255) {ClosingTime=ClosingTime+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(ClosingTime>0) {ClosingTime=ClosingTime-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(ClosingTime<255) {ClosingTime=ClosingTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(ClosingTime>0) {ClosingTime=ClosingTime-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 2:
- if(Keys &  (0b001) ) if(InvalidTime<255) {InvalidTime=InvalidTime+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(InvalidTime>0) {InvalidTime=InvalidTime-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(InvalidTime<255) {InvalidTime=InvalidTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(InvalidTime>0) {InvalidTime=InvalidTime-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 3:
- if(Keys &  (0b001) ) if(AutocloseTime<255) {AutocloseTime=AutocloseTime+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(AutocloseTime>0) {AutocloseTime=AutocloseTime-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(AutocloseTime<255) {AutocloseTime=AutocloseTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(AutocloseTime>0) {AutocloseTime=AutocloseTime-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 4:
- if(Keys &  (0b001) ) if(NetworkAddress<255) {NetworkAddress=NetworkAddress+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(NetworkAddress>0) {NetworkAddress=NetworkAddress-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(NetworkAddress<255) {NetworkAddress=NetworkAddress+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(NetworkAddress>0) {NetworkAddress=NetworkAddress-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 5:
- if(Keys &  (0b001) ) if(WorkingMode<1) {WorkingMode=WorkingMode+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(WorkingMode>0) {WorkingMode=WorkingMode-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(WorkingMode<1) {WorkingMode=WorkingMode+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(WorkingMode>0) {WorkingMode=WorkingMode-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 6:
- if(Keys &  (0b001) ) if(IRMode<1) {IRMode=IRMode+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(IRMode>0) {IRMode=IRMode-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(IRMode<1) {IRMode=IRMode+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(IRMode>0) {IRMode=IRMode-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 
  case 7:
- if(Keys &  (0b001) ) if(CarPassTime<255) {CarPassTime=CarPassTime+1;UpdateMenuText();}
- if(Keys &  (0b100) ) if(CarPassTime>0) {CarPassTime=CarPassTime-1;UpdateMenuText();}
+ if(Keys &  (0b100) ) if(CarPassTime<255) {CarPassTime=CarPassTime+1;UpdateMenuText();}
+ if(Keys &  (0b001) ) if(CarPassTime>0) {CarPassTime=CarPassTime-1;UpdateMenuText();}
  if(Keys &  (0b010) ) MenuState=1;
  break;
 

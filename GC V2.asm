@@ -78,13 +78,13 @@ L_Init0:
 	BSF         TXSTA+0, 2, 0
 	CALL        _UART1_Init+0, 0
 ;GC V2.c,153 :: 		RC1IF_bit=0;
-	BCF         RC1IF_bit+0, BitPos(RC1IF_bit+0) 
+	BCF         RC1IF_bit+0, 5 
 ;GC V2.c,154 :: 		RC1IE_bit=1;
-	BSF         RC1IE_bit+0, BitPos(RC1IE_bit+0) 
+	BSF         RC1IE_bit+0, 5 
 ;GC V2.c,155 :: 		RC1IP_bit=1;
-	BSF         RC1IP_bit+0, BitPos(RC1IP_bit+0) 
+	BSF         RC1IP_bit+0, 5 
 ;GC V2.c,156 :: 		PEIE_bit=1;
-	BSF         PEIE_bit+0, BitPos(PEIE_bit+0) 
+	BSF         PEIE_bit+0, 6 
 ;GC V2.c,157 :: 		UART_Set_Active(&UART1_Read, &UART1_Write, &UART1_Data_Ready, &UART1_Tx_Idle);
 	MOVLW       _UART1_Read+0
 	MOVWF       FARG_UART_Set_Active_read_ptr+0 
@@ -143,9 +143,9 @@ _interrupt:
 
 ;GC V2.c,184 :: 		void interrupt()
 ;GC V2.c,186 :: 		if((TMR0IF_bit)&&(TMR0IE_bit))
-	BTFSS       TMR0IF_bit+0, BitPos(TMR0IF_bit+0) 
+	BTFSS       TMR0IF_bit+0, 2 
 	GOTO        L_interrupt3
-	BTFSS       TMR0IE_bit+0, BitPos(TMR0IE_bit+0) 
+	BTFSS       TMR0IE_bit+0, 5 
 	GOTO        L_interrupt3
 L__interrupt191:
 ;GC V2.c,188 :: 		Flag20ms=1;
@@ -170,13 +170,13 @@ L_interrupt4:
 	MOVLW       191
 	MOVWF       TMR0L+0 
 ;GC V2.c,194 :: 		TMR0IF_bit=0;
-	BCF         TMR0IF_bit+0, BitPos(TMR0IF_bit+0) 
+	BCF         TMR0IF_bit+0, 2 
 ;GC V2.c,195 :: 		}
 L_interrupt3:
 ;GC V2.c,197 :: 		if((RC1IE_bit)&&(RC1IF_bit))
-	BTFSS       RC1IE_bit+0, BitPos(RC1IE_bit+0) 
+	BTFSS       RC1IE_bit+0, 5 
 	GOTO        L_interrupt7
-	BTFSS       RC1IF_bit+0, BitPos(RC1IF_bit+0) 
+	BTFSS       RC1IF_bit+0, 5 
 	GOTO        L_interrupt7
 L__interrupt190:
 ;GC V2.c,199 :: 		RS485Slave_Receive(NetBuffer);
@@ -186,7 +186,7 @@ L__interrupt190:
 	MOVWF       FARG_RS485Slave_Receive_data_buffer+1 
 	CALL        _RS485Slave_Receive+0, 0
 ;GC V2.c,200 :: 		RC1IF_bit=0;
-	BCF         RC1IF_bit+0, BitPos(RC1IF_bit+0) 
+	BCF         RC1IF_bit+0, 5 
 ;GC V2.c,201 :: 		}
 L_interrupt7:
 ;GC V2.c,202 :: 		}
@@ -205,6 +205,21 @@ _main:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr2_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr2_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr2_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr2_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr2_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr2_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr2_GC_32V2+0)
@@ -215,6 +230,21 @@ _main:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr3_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr3_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr3_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr3_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr3_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr3_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr3_GC_32V2+0)
@@ -464,20 +494,12 @@ L__ShowLCTime212:
 	MOVWF       R3 
 	CALL        _Div_32x32_U+0, 0
 	MOVF        R0, 0 
-	MOVWF       FLOC__ShowLCTime+0 
-	MOVF        R1, 0 
-	MOVWF       FLOC__ShowLCTime+1 
-	MOVF        R2, 0 
-	MOVWF       FLOC__ShowLCTime+2 
-	MOVF        R3, 0 
-	MOVWF       FLOC__ShowLCTime+3 
-	MOVF        FLOC__ShowLCTime+0, 0 
 	MOVWF       ShowLCTime_tm_L0+0 
-	MOVF        FLOC__ShowLCTime+1, 0 
+	MOVF        R1, 0 
 	MOVWF       ShowLCTime_tm_L0+1 
-	MOVF        FLOC__ShowLCTime+2, 0 
+	MOVF        R2, 0 
 	MOVWF       ShowLCTime_tm_L0+2 
-	MOVF        FLOC__ShowLCTime+3, 0 
+	MOVF        R3, 0 
 	MOVWF       ShowLCTime_tm_L0+3 
 ;GC V2.c,299 :: 		minutes=(tm%60);
 	MOVLW       60
@@ -486,14 +508,6 @@ L__ShowLCTime212:
 	MOVWF       R5 
 	MOVWF       R6 
 	MOVWF       R7 
-	MOVF        FLOC__ShowLCTime+0, 0 
-	MOVWF       R0 
-	MOVF        FLOC__ShowLCTime+1, 0 
-	MOVWF       R1 
-	MOVF        FLOC__ShowLCTime+2, 0 
-	MOVWF       R2 
-	MOVF        FLOC__ShowLCTime+3, 0 
-	MOVWF       R3 
 	CALL        _Div_32x32_U+0, 0
 	MOVF        R8, 0 
 	MOVWF       R0 
@@ -512,13 +526,13 @@ L__ShowLCTime212:
 	MOVWF       R5 
 	MOVWF       R6 
 	MOVWF       R7 
-	MOVF        FLOC__ShowLCTime+0, 0 
+	MOVF        ShowLCTime_tm_L0+0, 0 
 	MOVWF       R0 
-	MOVF        FLOC__ShowLCTime+1, 0 
+	MOVF        ShowLCTime_tm_L0+1, 0 
 	MOVWF       R1 
-	MOVF        FLOC__ShowLCTime+2, 0 
+	MOVF        ShowLCTime_tm_L0+2, 0 
 	MOVWF       R2 
-	MOVF        FLOC__ShowLCTime+3, 0 
+	MOVF        ShowLCTime_tm_L0+3, 0 
 	MOVWF       R3 
 	CALL        _Div_32x32_U+0, 0
 ;GC V2.c,302 :: 		wordtostr(hours,txt+2);
@@ -552,6 +566,13 @@ L__ShowLCTime212:
 	MOVWF       FARG_memcpy_d1+0 
 	MOVLW       hi_addr(ShowLCTime_txt_L0+0)
 	MOVWF       FARG_memcpy_d1+1 
+	MOVLW       76
+	MOVWF       ?lstr4_GC_32V2+0 
+	MOVLW       67
+	MOVWF       ?lstr4_GC_32V2+1 
+	MOVLW       58
+	MOVWF       ?lstr4_GC_32V2+2 
+	CLRF        ?lstr4_GC_32V2+3 
 	MOVLW       ?lstr4_GC_32V2+0
 	MOVWF       FARG_memcpy_s1+0 
 	MOVLW       hi_addr(?lstr4_GC_32V2+0)
@@ -566,6 +587,11 @@ L__ShowLCTime212:
 	MOVWF       FARG_memcpy_d1+0 
 	MOVLW       hi_addr(ShowLCTime_txt_L0+7)
 	MOVWF       FARG_memcpy_d1+1 
+	MOVLW       72
+	MOVWF       ?lstr5_GC_32V2+0 
+	MOVLW       32
+	MOVWF       ?lstr5_GC_32V2+1 
+	CLRF        ?lstr5_GC_32V2+2 
 	MOVLW       ?lstr5_GC_32V2+0
 	MOVWF       FARG_memcpy_s1+0 
 	MOVLW       hi_addr(?lstr5_GC_32V2+0)
@@ -580,6 +606,11 @@ L__ShowLCTime212:
 	MOVWF       FARG_memcpy_d1+0 
 	MOVLW       hi_addr(ShowLCTime_txt_L0+11)
 	MOVWF       FARG_memcpy_d1+1 
+	MOVLW       77
+	MOVWF       ?lstr6_GC_32V2+0 
+	MOVLW       32
+	MOVWF       ?lstr6_GC_32V2+1 
+	CLRF        ?lstr6_GC_32V2+2 
 	MOVLW       ?lstr6_GC_32V2+0
 	MOVWF       FARG_memcpy_s1+0 
 	MOVLW       hi_addr(?lstr6_GC_32V2+0)
@@ -594,6 +625,11 @@ L__ShowLCTime212:
 	MOVWF       FARG_memcpy_d1+0 
 	MOVLW       hi_addr(ShowLCTime_txt_L0+15)
 	MOVWF       FARG_memcpy_d1+1 
+	MOVLW       83
+	MOVWF       ?lstr7_GC_32V2+0 
+	MOVLW       32
+	MOVWF       ?lstr7_GC_32V2+1 
+	CLRF        ?lstr7_GC_32V2+2 
 	MOVLW       ?lstr7_GC_32V2+0
 	MOVWF       FARG_memcpy_s1+0 
 	MOVLW       hi_addr(?lstr7_GC_32V2+0)
@@ -690,6 +726,21 @@ _UpdateMenuText:
 	MOVWF       FARG_memcpy_d1+0 
 	MOVLW       hi_addr(UpdateMenuText_txt_L0+0)
 	MOVWF       FARG_memcpy_d1+1 
+	MOVLW       ?ICS?lstr8_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr8_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr8_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr8_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr8_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr8_GC_32V2+0
 	MOVWF       FARG_memcpy_s1+0 
 	MOVLW       hi_addr(?lstr8_GC_32V2+0)
@@ -712,6 +763,21 @@ L_UpdateMenuText29:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr9_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr9_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr9_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr9_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr9_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr9_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr9_GC_32V2+0)
@@ -744,6 +810,21 @@ L_UpdateMenuText30:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr10_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr10_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr10_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr10_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr10_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr10_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr10_GC_32V2+0)
@@ -776,6 +857,21 @@ L_UpdateMenuText31:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr11_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr11_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr11_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr11_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr11_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr11_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr11_GC_32V2+0)
@@ -808,6 +904,21 @@ L_UpdateMenuText32:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr12_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr12_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr12_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr12_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr12_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr12_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr12_GC_32V2+0)
@@ -840,6 +951,21 @@ L_UpdateMenuText33:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr13_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr13_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr13_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr13_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr13_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr13_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr13_GC_32V2+0)
@@ -872,6 +998,21 @@ L_UpdateMenuText34:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr14_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr14_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr14_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr14_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr14_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr14_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr14_GC_32V2+0)
@@ -887,6 +1028,21 @@ L_UpdateMenuText34:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr15_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr15_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr15_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr15_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr15_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr15_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr15_GC_32V2+0)
@@ -899,6 +1055,21 @@ L_UpdateMenuText35:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr16_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr16_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr16_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr16_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr16_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr16_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr16_GC_32V2+0)
@@ -914,6 +1085,21 @@ L_UpdateMenuText37:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr17_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr17_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr17_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr17_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr17_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr17_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr17_GC_32V2+0)
@@ -924,11 +1110,26 @@ L_UpdateMenuText37:
 	XORLW       0
 	BTFSS       STATUS+0, 2 
 	GOTO        L_UpdateMenuText38
-;GC V2.c,419 :: 		lcd_out(2,1,"       NC       ");
+;GC V2.c,419 :: 		lcd_out(2,1,"       NO       ");
 	MOVLW       2
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr18_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr18_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr18_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr18_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr18_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr18_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr18_GC_32V2+0)
@@ -936,11 +1137,26 @@ L_UpdateMenuText37:
 	CALL        _Lcd_Out+0, 0
 	GOTO        L_UpdateMenuText39
 L_UpdateMenuText38:
-;GC V2.c,421 :: 		lcd_out(2,1,"       NO       ");
+;GC V2.c,421 :: 		lcd_out(2,1,"       NC       ");
 	MOVLW       2
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr19_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr19_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr19_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr19_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr19_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr19_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr19_GC_32V2+0)
@@ -956,6 +1172,21 @@ L_UpdateMenuText40:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr20_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr20_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr20_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr20_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr20_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr20_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr20_GC_32V2+0)
@@ -988,6 +1219,21 @@ L_UpdateMenuText41:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr21_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr21_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr21_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr21_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr21_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr21_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr21_GC_32V2+0)
@@ -1012,6 +1258,21 @@ L_UpdateMenuText42:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr22_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr22_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr22_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr22_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr22_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr22_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr22_GC_32V2+0)
@@ -1096,7 +1357,7 @@ _Menu2:
 ;GC V2.c,473 :: 		LCDFlashFlag=0;
 	CLRF        _LCDFlashFlag+0 
 ;GC V2.c,474 :: 		if(Keys & DOWN)
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu243
 ;GC V2.c,476 :: 		if(MenuCounter>0)
 	MOVF        _MenuCounter+0, 0 
@@ -1117,7 +1378,7 @@ L_Menu245:
 ;GC V2.c,481 :: 		}
 L_Menu243:
 ;GC V2.c,483 :: 		if(Keys & UP)
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu246
 ;GC V2.c,485 :: 		if(MenuCounter<MenuLevel)
 	MOVLW       9
@@ -1159,7 +1420,7 @@ _Menu3:
 ;GC V2.c,508 :: 		case 0:
 L_Menu352:
 ;GC V2.c,509 :: 		if(Keys & UP)     if(OpenningTime<255)  {OpenningTime=OpenningTime+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu353
 	MOVLW       255
 	SUBWF       _OpenningTime+0, 0 
@@ -1170,7 +1431,7 @@ L_Menu352:
 L_Menu354:
 L_Menu353:
 ;GC V2.c,510 :: 		if(Keys & DOWN)   if(OpenningTime>0)    {OpenningTime=OpenningTime-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu355
 	MOVF        _OpenningTime+0, 0 
 	SUBLW       0
@@ -1191,7 +1452,7 @@ L_Menu357:
 ;GC V2.c,514 :: 		case 1:
 L_Menu358:
 ;GC V2.c,515 :: 		if(Keys & UP)     if(ClosingTime<255)  {ClosingTime=ClosingTime+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu359
 	MOVLW       255
 	SUBWF       _ClosingTime+0, 0 
@@ -1202,7 +1463,7 @@ L_Menu358:
 L_Menu360:
 L_Menu359:
 ;GC V2.c,516 :: 		if(Keys & DOWN)   if(ClosingTime>0)    {ClosingTime=ClosingTime-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu361
 	MOVF        _ClosingTime+0, 0 
 	SUBLW       0
@@ -1223,7 +1484,7 @@ L_Menu363:
 ;GC V2.c,520 :: 		case 2:
 L_Menu364:
 ;GC V2.c,521 :: 		if(Keys & UP)     if(InvalidTime<255)  {InvalidTime=InvalidTime+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu365
 	MOVLW       255
 	SUBWF       _InvalidTime+0, 0 
@@ -1234,7 +1495,7 @@ L_Menu364:
 L_Menu366:
 L_Menu365:
 ;GC V2.c,522 :: 		if(Keys & DOWN)   if(InvalidTime>0)    {InvalidTime=InvalidTime-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu367
 	MOVF        _InvalidTime+0, 0 
 	SUBLW       0
@@ -1255,7 +1516,7 @@ L_Menu369:
 ;GC V2.c,526 :: 		case 3:
 L_Menu370:
 ;GC V2.c,527 :: 		if(Keys & UP)     if(AutocloseTime<255)  {AutocloseTime=AutocloseTime+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu371
 	MOVLW       255
 	SUBWF       _AutocloseTime+0, 0 
@@ -1266,7 +1527,7 @@ L_Menu370:
 L_Menu372:
 L_Menu371:
 ;GC V2.c,528 :: 		if(Keys & DOWN)   if(AutocloseTime>0)    {AutocloseTime=AutocloseTime-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu373
 	MOVF        _AutocloseTime+0, 0 
 	SUBLW       0
@@ -1287,7 +1548,7 @@ L_Menu375:
 ;GC V2.c,532 :: 		case 4:
 L_Menu376:
 ;GC V2.c,533 :: 		if(Keys & UP)     if(NetworkAddress<255)  {NetworkAddress=NetworkAddress+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu377
 	MOVLW       255
 	SUBWF       _NetworkAddress+0, 0 
@@ -1298,7 +1559,7 @@ L_Menu376:
 L_Menu378:
 L_Menu377:
 ;GC V2.c,534 :: 		if(Keys & DOWN)   if(NetworkAddress>0)    {NetworkAddress=NetworkAddress-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu379
 	MOVF        _NetworkAddress+0, 0 
 	SUBLW       0
@@ -1319,7 +1580,7 @@ L_Menu381:
 ;GC V2.c,538 :: 		case 5:
 L_Menu382:
 ;GC V2.c,539 :: 		if(Keys & UP)     if(WorkingMode<1)  {WorkingMode=WorkingMode+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu383
 	MOVLW       1
 	SUBWF       _WorkingMode+0, 0 
@@ -1330,7 +1591,7 @@ L_Menu382:
 L_Menu384:
 L_Menu383:
 ;GC V2.c,540 :: 		if(Keys & DOWN)   if(WorkingMode>0)    {WorkingMode=WorkingMode-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu385
 	MOVF        _WorkingMode+0, 0 
 	SUBLW       0
@@ -1351,7 +1612,7 @@ L_Menu387:
 ;GC V2.c,544 :: 		case 6:
 L_Menu388:
 ;GC V2.c,545 :: 		if(Keys & UP)     if(IRMode<1)  {IRMode=IRMode+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu389
 	MOVLW       1
 	SUBWF       _IRMode+0, 0 
@@ -1362,7 +1623,7 @@ L_Menu388:
 L_Menu390:
 L_Menu389:
 ;GC V2.c,546 :: 		if(Keys & DOWN)   if(IRMode>0)    {IRMode=IRMode-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu391
 	MOVF        _IRMode+0, 0 
 	SUBLW       0
@@ -1383,7 +1644,7 @@ L_Menu393:
 ;GC V2.c,550 :: 		case 7:
 L_Menu394:
 ;GC V2.c,551 :: 		if(Keys & UP)     if(CarPassTime<255)  {CarPassTime=CarPassTime+1;UpdateMenuText();}
-	BTFSS       _Keys+0, 0 
+	BTFSS       _Keys+0, 2 
 	GOTO        L_Menu395
 	MOVLW       255
 	SUBWF       _CarPassTime+0, 0 
@@ -1394,7 +1655,7 @@ L_Menu394:
 L_Menu396:
 L_Menu395:
 ;GC V2.c,552 :: 		if(Keys & DOWN)   if(CarPassTime>0)    {CarPassTime=CarPassTime-1;UpdateMenuText();}
-	BTFSS       _Keys+0, 2 
+	BTFSS       _Keys+0, 0 
 	GOTO        L_Menu397
 	MOVF        _CarPassTime+0, 0 
 	SUBLW       0
@@ -1516,6 +1777,13 @@ _charValueToStr:
 	MOVLW       0
 	ADDWFC      FARG_charValueToStr_string+1, 0 
 	MOVWF       FARG_memcpy_d1+1 
+	MOVLW       46
+	MOVWF       ?lstr23_GC_32V2+0 
+	MOVLW       53
+	MOVWF       ?lstr23_GC_32V2+1 
+	MOVLW       115
+	MOVWF       ?lstr23_GC_32V2+2 
+	CLRF        ?lstr23_GC_32V2+3 
 	MOVLW       ?lstr23_GC_32V2+0
 	MOVWF       FARG_memcpy_s1+0 
 	MOVLW       hi_addr(?lstr23_GC_32V2+0)
@@ -1534,6 +1802,13 @@ L_charValueToStr104:
 	MOVLW       0
 	ADDWFC      FARG_charValueToStr_string+1, 0 
 	MOVWF       FARG_memcpy_d1+1 
+	MOVLW       46
+	MOVWF       ?lstr24_GC_32V2+0 
+	MOVLW       48
+	MOVWF       ?lstr24_GC_32V2+1 
+	MOVLW       115
+	MOVWF       ?lstr24_GC_32V2+2 
+	CLRF        ?lstr24_GC_32V2+3 
 	MOVLW       ?lstr24_GC_32V2+0
 	MOVWF       FARG_memcpy_s1+0 
 	MOVLW       hi_addr(?lstr24_GC_32V2+0)
@@ -1588,6 +1863,21 @@ L__Sim0192:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr25_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr25_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr25_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr25_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr25_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr25_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr25_GC_32V2+0)
@@ -1639,6 +1929,21 @@ L__Sim1193:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr26_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr26_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr26_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr26_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr26_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr26_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr26_GC_32V2+0)
@@ -1706,6 +2011,21 @@ L__Sim2194:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr27_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr27_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr27_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr27_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr27_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr27_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr27_GC_32V2+0)
@@ -1790,6 +2110,21 @@ L__Sim3196:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr28_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr28_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr28_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr28_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr28_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr28_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr28_GC_32V2+0)
@@ -1883,6 +2218,21 @@ L__Sim3195:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr29_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr29_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr29_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr29_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr29_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr29_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr29_GC_32V2+0)
@@ -1945,6 +2295,21 @@ L__Sim4199:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr30_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr30_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr30_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr30_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr30_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr30_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr30_GC_32V2+0)
@@ -2031,6 +2396,21 @@ L__Sim4198:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr31_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr31_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr31_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr31_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr31_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr31_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr31_GC_32V2+0)
@@ -2105,6 +2485,21 @@ L__Sim4197:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr32_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr32_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr32_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr32_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr32_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr32_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr32_GC_32V2+0)
@@ -2180,6 +2575,21 @@ L__Sim5200:
 	MOVWF       FARG_Lcd_Out_row+0 
 	MOVLW       1
 	MOVWF       FARG_Lcd_Out_column+0 
+	MOVLW       ?ICS?lstr33_GC_32V2+0
+	MOVWF       TBLPTRL 
+	MOVLW       hi_addr(?ICS?lstr33_GC_32V2+0)
+	MOVWF       TBLPTRH 
+	MOVLW       higher_addr(?ICS?lstr33_GC_32V2+0)
+	MOVWF       TBLPTRU 
+	MOVLW       ?lstr33_GC_32V2+0
+	MOVWF       FSR1 
+	MOVLW       hi_addr(?lstr33_GC_32V2+0)
+	MOVWF       FSR1H 
+	MOVLW       17
+	MOVWF       R0 
+	MOVLW       1
+	MOVWF       R1 
+	CALL        ___CC2DW+0, 0
 	MOVLW       ?lstr33_GC_32V2+0
 	MOVWF       FARG_Lcd_Out_text+0 
 	MOVLW       hi_addr(?lstr33_GC_32V2+0)
